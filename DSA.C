@@ -42,7 +42,7 @@
    }
 }
   1.c) // armstrong or not-d
-   // 153=1^3+2^3+3^3=153
+   // 153=1^3+5^3+3^3=153
 {
    int n, r, temp, sum = 0;
    printf("enter a number : ");
@@ -73,7 +73,7 @@
    {
        fact *= i;
    }
-   printf("the fact of %d is : %d", n, fact);
+   printf("the factorial of %d is : %d", n, fact);
 }
   2.a)// mul of 2 square matrix
 {
@@ -197,7 +197,7 @@
     }
 }
 
-// 3.b) fib using rec..
+// 3.B) fib using rec..
 //  fib=0,1,1,2,3,5...=(n-1)+(n-2)
 
 int fib(int);
@@ -225,7 +225,8 @@ int fib(int n)
     }
 }
 
-    //3.C)add 2 no's using call by ref..
+//3.C)add 2 no's using call by ref..
+
 int add(int*,int*);
 void main()
 {
@@ -241,8 +242,264 @@ int add(int *a,int *b)
     c=*a+*b;
 }
 
-// 7.C)stack using array
+//4.B) file coping
 
+#include<stdlib.h>
+
+void main()
+{
+    FILE *fptr1,*fptr2;
+    char ch,fname1[20],fname2[20];;
+    //printf("\n\n copy a file in another name ");
+    printf("input source file name :");
+    scanf("%s",fname1);
+    fptr1=fopen(fname1,"r");
+    if (fptr1==NULL)
+    {
+        printf("file doesnt found");
+        exit(1);
+    }
+    printf("input the new file name :");
+    scanf("%s",fname2);
+    fptr2=fopen(fname2,"w");
+    if (fptr2==NULL)
+    {
+        printf("file doesnt found \n");
+        fclose(fptr1);
+        exit(2);
+    }
+    while (1)
+    {
+        ch=getc(fptr1);
+        if(ch==EOF)
+        {
+            break;
+        }
+        else
+        {
+            fputc(ch,fptr2);
+        }
+    }
+    printf("the file %s copied successfully in file %s \n\n",fname1,fname2);
+    fclose(fptr1);
+    fclose(fptr2);
+}
+
+//4.A) append line at end of the txt file
+#include <stdlib.h>
+
+void main()
+{
+    FILE *fptr;
+    int i, n;
+    char str[50];
+    char fname[20];
+    char str1;
+    printf("append multiple lines at the end end of a text a file:\n");
+    printf("enter the file name to be opended");
+    scanf("%s", fname);
+    fptr = fopen(fname, "a");
+    printf("enter the number of lines to be written :");
+    scanf("%d", &n);
+    printf("the lines are :\n");
+    for (i = 0; i < n + 1; i++)
+    {
+        fgets(str, sizeof str, stdin);
+        fputs(str, fptr);
+    }
+    fclose(fptr);
+    fptr = fopen(fname, "r");
+    printf("the content of the file %s is :\n", fname);
+    str1 = fgetc(fptr);
+    while (str1 != EOF)
+    {
+        printf("%c", str1);
+        str1 = fgetc(fptr);
+    }
+    printf("\n");
+    fclose(fptr);
+}
+
+// 5.A) Recursion_Fact
+
+int fact(int n)
+{
+    if (n == 0 || n == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return n * fact(n - 1);
+    }
+}
+void main()
+{
+    int n;
+    printf("enter a number\n");
+    scanf("%d", &n);
+    printf("fact of %d is : %d", n, fact(n));
+}
+
+//5.B)GCD
+
+int gcd(int a,int b)
+{
+    while (b!=0)
+    {
+        int temp=b;
+        b=a%b;
+        a=temp;
+    }
+}
+void main()
+{
+    int n1,n2;
+    printf("enter any 2 numbers\n");
+    scanf("%d%d",&n1,&n2);
+    int res=gcd(n1,n2);
+    printf("gcd of %d and %d is :%d",n1,n2,gcd(n1,n2));
+}
+
+//5.C)TOH
+
+void TOH(int n, char from_rod, char to_rod, char aux_rod)
+{
+    if (n == 1)
+    {
+        printf("\n Move disk 1 from rod %c to rod %c", from_rod, to_rod);
+        return;
+    }
+    TOH(n - 1, from_rod, aux_rod, to_rod);
+    printf("\n Move disk %d from rod %c to rod %c", n, from_rod, to_rod);
+    TOH(n - 1, aux_rod, to_rod, from_rod);
+}
+void main()
+{
+    int n = 1;                      // Number of disks
+    TOH(n, 'A', 'C', 'B'); // A, B and C are names of rods
+}
+
+// 6.C)linear search
+void main()
+{
+    int list[20], size, i, sElement;
+    printf("Enter size of the list: ");
+    scanf("%d", &size);
+    printf("Enter any %d integer values: ", size);
+    for (i = 0; i < size; i++)
+    scanf("%d", &list[i]);
+    printf("Enter the element to be Search: ");
+    scanf("%d", &sElement);
+
+    // Linear Search Logic
+    for (i = 0; i < size; i++)
+    {
+        if (sElement == list[i])
+        {
+            printf("Element is found at %d index", i);
+            break;
+        }
+    }
+    if (i == size)
+        printf("Given element is not found in the list!!!");
+}
+
+// 6.B)binary search
+
+#include <stdio.h>
+int main()
+{
+    int i, first, last, mid, n, key, array[100];
+    printf("Enter number of elements \n");
+    scanf("%d", &n);
+    printf("Enter %d integers", n);
+    for (i = 0; i < n; i++)
+    scanf("%d", &array[i]);
+    printf("Enter value to find");
+    scanf("%d", &key);
+    first = 0;
+    last = n - 1;
+    mid = (first + last) / 2;
+    while (first <= last)
+    {
+        if (array[mid] < key)
+            first = mid + 1;
+        else if (array[mid] == key)
+        {
+            printf("%d found at location %d \n", key, mid + 1);
+            break;
+        }
+        else
+            last = mid - 1;
+        mid = (first + last) / 2;
+    }
+    if (first > last)
+        printf("Not found! %d isn't present in the list \n", key);
+}
+
+// using functions -> BS
+
+// Function for non-recursive binary search
+int binarySearch(int arr[], int n, int key)
+{
+    int first = 0;
+    int last = n - 1;
+
+    while (first <= last)
+    {
+        int mid = first + (last - first) / 2;
+
+        // Check if key is present at mid
+        if (arr[mid] == key)
+            return mid;
+
+        // If key is greater, ignore the first half
+        if (arr[mid] < key)
+            first = mid + 1;
+
+        // If key is smaller, ignore the last half
+        else
+            last = mid - 1;
+    }
+
+    // Key is not present in the array
+    return -1;
+}
+
+int main()
+{
+    int n, key;
+
+    // Input the size of the array
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    // Input elements of the array
+    printf("Enter the sorted elements of the array:\n");
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+
+    // Input the key to search
+    printf("Enter the key to search: ");
+    scanf("%d", &key);
+
+    // Perform non-recursive binary search
+    int result = binarySearch(arr, n, key);
+
+    // Print the result
+    if (result == -1)
+        printf("Element %d is not present in the array\n", key);
+    else
+        printf("Element %d is present at index %d\n", key, result);
+}
+
+// 7.A)stack using array
+/*
 #include <stdlib.h>
 #define size 5
 
@@ -397,7 +654,7 @@ void main()
     }
 }
 
-// stack using linkedlist(errors)
+//7.B) stack using linkedlist(errors)
 #include <stdlib.h>
 struct node
 {
@@ -501,7 +758,7 @@ void main()
     }
 }
 
-//queue using linkedlist
+// 8.B) Queue using linkedlist
 
 #include<stdlib.h>
 struct node
@@ -577,9 +834,9 @@ void main()
     dequeue();
     show();
     peek();
-}*/
+}
 
-// single linked list
+//10) Single linked list
 // 1)Node creation
 #include <stdlib.h>
 
@@ -613,4 +870,261 @@ void main()
     second->link = third;
     third->link = NULL;
     print_list(&head);
+}
+// countinues available in class...
+;
+;
+;
+;
+;
+;
+
+
+
+// 10) Polynomial addition using linked list
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure to represent a term in the polynomial
+struct Term
+{
+    int coefficient;
+    int exponent;
+    struct Term *next;
+};
+
+// Function to create a new term
+struct Term *createTerm(int coefficient, int exponent)
+{
+    struct Term *newTerm = (struct Term *)malloc(sizeof(struct Term));
+    if (newTerm == NULL)
+    {
+        printf("Memory allocation failed\n");
+        exit(1);
+    }
+
+    newTerm->coefficient = coefficient;
+    newTerm->exponent = exponent;
+    newTerm->next = NULL;
+
+    return newTerm;
+}
+
+// Function to insert a term into the polynomial
+void insertTerm(struct Term **poly, int coefficient, int exponent)
+{
+    struct Term *newTerm = createTerm(coefficient, exponent);
+
+    if (*poly == NULL)
+    {
+        *poly = newTerm;
+    }
+    else
+    {
+        struct Term *temp = *poly;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = newTerm;
+    }
+}
+
+// Function to add two polynomials
+struct Term *addPolynomials(struct Term *poly1, struct Term *poly2)
+{
+    struct Term *result = NULL;
+
+    while (poly1 != NULL || poly2 != NULL)
+    {
+        int coeff1 = (poly1 != NULL) ? poly1->coefficient : 0;
+        int coeff2 = (poly2 != NULL) ? poly2->coefficient : 0;
+        int exp1 = (poly1 != NULL) ? poly1->exponent : 0;
+        int exp2 = (poly2 != NULL) ? poly2->exponent : 0;
+
+        int sumCoeff = coeff1 + coeff2;
+        int sumExp = exp1;
+
+        if (exp1 == exp2)
+        {
+            sumExp = exp1;
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+        else if (exp1 > exp2)
+        {
+            sumExp = exp1;
+            poly1 = poly1->next;
+        }
+        else
+        {
+            sumExp = exp2;
+            poly2 = poly2->next;
+        }
+
+        insertTerm(&result, sumCoeff, sumExp);
+    }
+
+    return result;
+}
+
+// Function to display a polynomial
+void displayPolynomial(struct Term *poly)
+{
+    while (poly != NULL)
+    {
+        printf("%dx^%d", poly->coefficient, poly->exponent);
+        if (poly->next != NULL)
+        {
+            printf(" + ");
+        }
+        poly = poly->next;
+    }
+    printf("\n");
+}
+
+// Function to free memory used by a polynomial
+void freePolynomial(struct Term *poly)
+{
+    struct Term *temp;
+    while (poly != NULL)
+    {
+        temp = poly;
+        poly = poly->next;
+        free(temp);
+    }
+}
+
+void main()
+{
+    struct Term *poly1 = NULL;
+    struct Term *poly2 = NULL;
+
+    // Insert terms into the first polynomial
+    insertTerm(&poly1, 3, 2);
+    insertTerm(&poly1, 5, 1);
+    insertTerm(&poly1, 2, 0);
+
+    // Insert terms into the second polynomial
+    insertTerm(&poly2, 4, 3);
+    insertTerm(&poly2, 1, 1);
+    insertTerm(&poly2, 7, 0);
+
+    printf("Polynomial 1: ");
+    displayPolynomial(poly1);
+
+    printf("Polynomial 2: ");
+    displayPolynomial(poly2);
+
+    // Perform polynomial addition
+    struct Term *result = addPolynomials(poly1, poly2);
+
+    printf("Result (Sum): ");
+    displayPolynomial(result);
+
+    // Free memory used by the polynomials
+    freePolynomial(poly1);
+    freePolynomial(poly2);
+    freePolynomial(result);
+}*/
+
+// 11.A)Recursive_Traverse_Binary tree->ORDERS--pre,in,post
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definition of a binary tree node
+struct Node
+{
+    int data;
+    struct Node *left;
+    struct Node *right;
+};
+
+// Function to create a new node
+struct Node *createNode(int data)
+{
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    if (newNode == NULL)
+    {
+        printf("Memory allocation failed\n");
+        exit(1);
+    }
+
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+
+    return newNode;
+}
+
+// Function for preorder traversal
+void preorderTraversal(struct Node *root)
+{
+    if (root != NULL)
+    {
+        printf("%d ", root->data);
+        preorderTraversal(root->left);
+        preorderTraversal(root->right);
+    }
+}
+
+// Function for inorder traversal
+void inorderTraversal(struct Node *root)
+{
+    if (root != NULL)
+    {
+        inorderTraversal(root->left);
+        printf("%d ", root->data);
+        inorderTraversal(root->right);
+    }
+}
+
+// Function for postorder traversal
+void postorderTraversal(struct Node *root)
+{
+    if (root != NULL)
+    {
+        postorderTraversal(root->left);
+        postorderTraversal(root->right);
+        printf("%d ", root->data);
+    }
+}
+
+// Function to free memory used by the binary tree
+void freeTree(struct Node *root)
+{
+    if (root != NULL)
+    {
+        freeTree(root->left);
+        freeTree(root->right);
+        free(root);
+    }
+}
+void main()
+{
+    // Constructing a sample binary tree
+    struct Node *root = createNode(1);
+    root->left = createNode(2);
+    root->right = createNode(3);
+    root->left->left = createNode(4);
+    root->left->right = createNode(5);
+    root->right->left = createNode(6);
+    root->right->right = createNode(7);
+
+    printf("Preorder Traversal: ");
+    preorderTraversal(root);
+    printf("\n");
+
+    printf("Inorder Traversal: ");
+    inorderTraversal(root);
+    printf("\n");
+
+    printf("Postorder Traversal: ");
+    postorderTraversal(root);
+    printf("\n");
+
+    // Free memory used by the binary tree
+    freeTree(root);
 }

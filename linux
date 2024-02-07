@@ -71,3 +71,34 @@ awk '{
   avg = sum / (NF - 1)
   print "Student ID:", $1, "Sum:", sum, "Average:", avg
 }' marks.txt
+
+//student marks
+echo "enter your name and number"
+read name num
+echo "enter your five subjects marks"
+read sub1
+read sub2
+read sub3
+read sub4
+read sub5
+total=`expr $sub1 + $sub2 + $sub3 + $sub4 + $sub5`
+avg=`expr $total / 5`
+echo "$name \t $num"
+if [ $avg -ge 80 ]
+then
+echo "grade A"
+elif [ $avg -ge 70 -a $avg -lt 80  ]
+then
+echo "grade B"
+elif [ $avg -ge 60 -a $avg -lt 70 ]
+then
+echo "grade C"
+elif [ $avg -ge 50 -a $avg -lt 60 ]
+then
+echo "grade D"
+elif  [ $avg -ge 40 -a $avg -lt 50 ]
+then
+echo " grade E"
+else
+echo "grade F"
+fi

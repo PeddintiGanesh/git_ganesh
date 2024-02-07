@@ -1,0 +1,73 @@
+//prime number
+
+ #!/bin/Bash
+ 
+echo -e "enter number :"
+read n
+for (( i = 2; i < = $n/2; i++ ))
+do
+ans = $((n%i))
+if[$ans -eq 0]
+then
+echo "$n is not a prime number"
+exit 0
+fi
+done
+echo "$n is a prime number"
+
+//fibonacci
+
+echo "enter number of series :"
+read n
+a=0
+b=1
+echo "the fibonacci series is :"
+for((i=0;i<n;i++))
+do
+echo -n "$a"
+fn =$((a+b))
+a=$b
+b=$fn
+done
+
+//armstrong 
+
+echo "enter the number"
+read n
+q=$n
+a=0
+while [$q-gt 0]
+do
+r= 'expr $q % 10'
+q= 'expr $q % 10'
+a= 'expr $a + $r /* $r /*$r'
+done 
+if [$a=$n]
+then
+echo "the number $n is armstrong"
+else
+echo "the number $n is not armstrong"
+fi
+
+//palindrome
+
+read -p “Enter a string: ” input_string
+
+# Reverse the string and compare with the original
+
+if [[ “$input_string” == “$(rev <<< “$input_string”)” ]]; then
+echo “The entered string ‘$input_string’ is a palindrome.”
+else
+echo “The entered string ‘$input_string’ is not a palindrome.”
+fi
+
+//awk file
+
+awk '{
+  sum = 0
+  for (i = 2; i <= NF; i++) {
+    sum += $i
+  }
+  avg = sum / (NF - 1)
+  print "Student ID:", $1, "Sum:", sum, "Average:", avg
+}' marks.txt

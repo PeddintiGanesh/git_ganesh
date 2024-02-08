@@ -602,3 +602,31 @@ void main() {
         printf("%d\t%d\t\t%d\t\t%d\n", i + 1, index_blocks[i], start_blocks[i], end_blocks[i]);
     }
 }
+
+//SEQUENCED 
+
+#include<stdio.h>
+int main(){
+	int n,i,j,b[20],sb[20],t[20],c[20][20];
+	printf("Enter no.of files : ");
+	scanf("%d",&n);
+	for(i=0;i<n;i++){
+		printf("\nEnter no of blocks occupied by file %d : ",i+1);
+		scanf("%d",&b[i]);
+		printf("\nEnter the starting block of file %d : ",i+1);
+		scanf("%d",&sb[i]);
+		t[i]=sb[i];
+		for(j=0;j<b[i];j++)
+			c[i][j]=sb[i]++;
+	}
+	printf("\n\nFilename \t Starting Block\t length \n");
+	for(i=0;i<n;i++)
+		printf("\n%d\t\t%d\t\t%d\n",i+1,t[i],b[i]);
+	for(i=0;i<n;i++){
+	printf("\nSequenced memory allocations of file %d :",i+1);
+	for(j=0;j<b[i];j++)
+		printf("%d  ",&c[i][j]);
+	printf("\n");
+	}
+	return 0;
+}

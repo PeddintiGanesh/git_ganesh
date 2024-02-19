@@ -1,17 +1,17 @@
 // 1.a) n even number & sum
 #include <stdio.h>
-// #include<stdlib.h>
+/*// #include<stdlib.h>
 
-/*void main()
+void main()
 {
     int a, n, i, sum = 0 ;
-    printf("enter number of terms \n");
+    printf("enter number of terms : ");
     scanf("%d", &n);
     printf("the numbers are: ");
     for (i = 1; i <= n; i++)
     {
         a = 2 * i;
-        printf("%d", a);
+        printf("%d ", a);
         sum += a;
     }
     printf("\nthe sum of %d numbers is : %d", n, sum);
@@ -83,18 +83,19 @@
    printf("enter the number of columns");
    scanf("%d", &c);
    printf("enter the first matrtix elements");
-   for (i = 0; i < n; i++)
+   for (i = 0; i < r; i++)
    {
-       for (j = 0; j < n; j++)
+       for (j = 0; j < c; j++)
        {
            scanf("%d", &a[i][j]);
        }
    }
-   for (i = 0; i < n; i++)
+   printf("enter the second matrix elements");
+   for (i = 0; i < r; i++)
    {
-       for (j = 0; j < n; j++)
+       for (j = 0; j < c; j++)
        {
-           scanf("%d", &a[i][j]);
+           scanf("%d", &b[i][j]);
        }
    }
    printf("multiply the matrix =\n");
@@ -107,8 +108,8 @@
        {
            mul[i][j] += a[i][k] * b[k][j];
        }
-       }
-   }
+    }
+    }
    for (i = 0; i < r; i++)
    {
        for (j = 0; j < c; j++)
@@ -154,7 +155,7 @@
    }
 }
 
-// 3.a)prime number
+// 3.A)prime number..
 {
     int i, num,m=0,flag=0;
     printf("enter a number :");
@@ -413,7 +414,7 @@ int main()
     int i, first, last, mid, n, key, array[100];
     printf("Enter number of elements \n");
     scanf("%d", &n);
-    printf("Enter %d integers", n);
+    printf("Enter %d values", n);
     for (i = 0; i < n; i++)
     scanf("%d", &array[i]);
     printf("Enter value to find");
@@ -772,7 +773,7 @@ void enqueue(int value)
 {
     struct node*temp=(struct node*)malloc (sizeof(struct node));
     temp->data=value;
-    temp ->link=NULL;
+    temp->link=NULL;
     if(front==NULL)
     {
         front = rear=temp;
@@ -836,49 +837,153 @@ void main()
     peek();
 }
 
-//10) Single linked list
-// 1)Node creation
-#include <stdlib.h>
+//10) Single linked list..
 
-struct node
-{
+
+// 1)Node creation
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
     int data;
-    struct node *link;
+    struct node* link;
 };
-void print_list(struct node **head)
-{
+void print_list(struct node **head){
     struct node *p = *head;
-    printf("elements : ");
-    while (p != NULL)
+    printf("Elements : ");
+    while(p!=NULL)
     {
-        printf("%d ", p->data);
+        printf("%d ",p->data);
         p = p->link;
     }
-    print_list("\n");
-}
-void main()
-{
-    struct node *head = NULL;
-    struct node *first = (struct node *)malloc(sizeof(struct node *));
-    first->data = 10;
-    struct node *second = (struct node *)malloc(sizeof(struct node *));
-    second->data = 20;
-    struct node *third = (struct node *)malloc(sizeof(struct node *));
-    third->data = 30;
-    head = first;
-    first->link = second;
-    second->link = third;
-    third->link = NULL;
-    print_list(&head);
-}
-// countinues available in class...
-;
-;
-;
-;
-;
-;
+    printf("\n");
 
+}
+void insertion_at_end(struct node **head){
+    struct node *temp = (struct node*)malloc(sizeof(struct node*));
+    int value;
+    printf("Enter value : ");
+    scanf("%d",&value);
+    temp->data = value;
+    temp->link =NULL;
+    struct node *p= *head;
+    if(p==NULL)
+        *head = temp;
+    else
+    {
+        while(p->link!=NULL)
+        {
+            p = p->link;
+        }
+        p->link = temp;
+    }
+    printf("value is inserted successfully!\n");
+
+}
+void insertion_at_specified_position(struct node **head){
+    int position,value;
+    printf("Enter position and value :");
+    scanf("%d%d",&position,&value);
+    int cnt=1;
+    struct node *p = *head;
+    while(p!=NULL)
+    {
+        if(cnt==position)
+            break;
+        p = p->link;
+        cnt++;
+    }
+    if(p==NULL)
+    {
+        printf("Invalid Position!\n");
+    }
+    else
+    {
+        struct node *temp = (struct node*)malloc(sizeof(struct node*));
+        temp->data = value;
+        temp->link = p->link;
+        p->link=temp;
+        printf("Value is inserted at specified position!\n");
+    }
+}
+void deletion(struct node **head){
+    int target;
+    printf("Enter target value :");
+    scanf("%d",&target);
+    struct node *p = *head;
+    struct node *q = NULL;
+    while(p!=NULL)
+    {
+        if(p->data == target)
+            break;
+        q=p;
+        p = p->link;
+    }
+    if(p==NULL)
+        printf("Target value is already not present!\n");
+    else if(q== NULL)
+        *head = p->link;
+    else
+    {
+        q->link = p->link;
+        p->link= NULL;
+        free(p);
+        printf("Value is Deleted Successfully!\n");
+    }
+
+}
+
+void search(struct node **head)
+{
+    int target;
+    printf("Enter Target value :");
+    scanf("%d",&target);
+    int flag = -1;
+
+    struct node *p = *head;
+    while(p!=NULL)
+    {
+        if(p->data == target)
+        {
+            flag = 1;
+            break;
+        }
+        p = p->link;
+    }
+
+    if(flag ==-1)
+    {
+        printf("Element is not Found!\n");
+    }
+    else{
+        printf("Element is found!\n");
+    }
+}
+
+
+int main(){
+    struct node* head = NULL;
+    printf("Singly Linked List Implementation!\n");
+    while(1)
+    {
+        int option;
+        printf("Choose operation:\n1)Insertion at end\n2)Insertion at specified position\n3)Deletion\n4)Searching\n5)Print the list\n6)Exit\nEnter option:");
+        scanf("%d",&option);
+        if(option == 1)
+            insertion_at_end(&head);
+        else if(option ==2)
+            insertion_at_specified_position(&head);
+        else if(option ==3)
+            deletion(&head);
+        else if(option ==4)
+            search(&head);
+        else if(option == 5)
+            print_list(&head);
+        else
+            break;
+
+    }
+    return 0;
+}
 
 
 // 10) Polynomial addition using linked list
@@ -1027,7 +1132,7 @@ void main()
     freePolynomial(poly1);
     freePolynomial(poly2);
     freePolynomial(result);
-}*/
+}
 
 // 11.A)Recursive_Traverse_Binary tree->ORDERS--pre,in,post
 
@@ -1128,3 +1233,315 @@ void main()
     // Free memory used by the binary tree
     freeTree(root);
 }
+
+//16.A) Bubble sort in C:
+
+#include <stdio.h>
+// Function to perform bubble sort on an array
+void bubbleSort(int arr[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            // Swap if the element found is greater than the next element
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+void main()
+{
+    int n;
+    // Get the number of elements in the array
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+    int arr[n];
+    // Get elements from the user
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    // Perform Bubble Sort
+    bubbleSort(arr, n);
+    // Display the sorted array
+    printf("Sorted array: ");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+}
+
+
+//16.B) Quicksort in C
+#include <stdio.h>
+// Function to partition the array and return the pivot index
+int partition(int arr[], int low, int high)
+{
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j <= high - 1; j++)
+    {
+        if (arr[j] < pivot)
+        {
+            i++;
+            // Swap arr[i] and arr[j]
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    // Swap arr[i+1] and arr[high] (pivot)
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    return i + 1;
+}
+// Function to implement the Quick Sort algorithm
+void quickSort(int arr[], int low, int high)
+{
+    if (low < high)
+    {
+        // Find pivot such that elements smaller than pivot are on the left
+        // and elements greater than pivot are on the right
+        int pivotIndex = partition(arr, low, high);
+        // Recursively sort the subarrays
+        quickSort(arr, low, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, high);
+    }
+}
+void main()
+{
+    int n;
+    // Get the number of elements in the array
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+    int arr[n];
+    // Get elements from the user
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    // Perform Quick Sort
+    quickSort(arr, 0, n - 1);
+    // Display the sorted array
+    printf("Sorted array: ");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+}
+
+// 16.C)MERGE SORT
+
+#include <stdio.h>
+
+// Function to merge two halves of an array
+void merge(int arr[], int left, int mid, int right)
+{
+    int i, j, k;
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    // Create temporary arrays
+    int L[n1], R[n2];
+
+    // Copy data to temporary arrays L[] and R[]
+    for (i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[mid + 1 + j];
+
+    // Merge the temporary arrays back into arr[left..right]
+    i = 0;    // Initial index of first subarray
+    j = 0;    // Initial index of second subarray
+    k = left; // Initial index of merged subarray
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    // Copy the remaining elements of L[], if there are any
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    // Copy the remaining elements of R[], if there are any
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+// Main function to perform merge sort
+void mergeSort(int arr[], int left, int right)
+{
+    if (left < right)
+    {
+        // Same as (left+right)/2, but avoids overflow for large left and right
+        int mid = left + (right - left) / 2;
+
+        // Recursively sort the first and second halves
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+
+        // Merge the sorted halves
+        merge(arr, left, mid, right);
+    }
+}
+
+void main()
+{
+    int n;
+
+    // Get the number of elements from the user
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    // Get the array elements from the user
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+
+    // Perform merge sort
+    mergeSort(arr, 0, n - 1);
+
+    // Display the sorted array
+    printf("\nSorted array:\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+}
+
+//14)BINARY SEARCH TREE(BST)
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Node structure for the Binary Search Tree
+struct Node
+{
+    int data;
+    struct Node *left;
+    struct Node *right;
+};
+
+// Function to create a new node with a given data value
+struct Node *createNode(int value)
+{
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+// Function to insert a value into the Binary Search Tree
+struct Node *insert(struct Node *root, int value)
+{
+    // If the tree is empty, create a new node
+    if (root == NULL)
+    {
+        return createNode(value);
+    }
+
+    // Otherwise, recursively insert into the left or right subtree
+    if (value < root->data)
+    {
+        root->left = insert(root->left, value);
+    }
+    else if (value > root->data)
+    {
+        root->right = insert(root->right, value);
+    }
+
+    // Return the modified root
+    return root;
+}
+
+// Function to perform an in-order traversal of the Binary Search Tree
+void inOrderTraversal(struct Node *root)
+{
+    if (root != NULL)
+    {
+        inOrderTraversal(root->left);
+        printf("%d ", root->data);
+        inOrderTraversal(root->right);
+    }
+}
+
+// Function to search for a value in the Binary Search Tree
+struct Node *search(struct Node *root, int value)
+{
+    // If the tree is empty or the value is found, return the node
+    if (root == NULL || root->data == value)
+    {
+        return root;
+    }
+
+    // Recursively search in the left or right subtree
+    if (value < root->data)
+    {
+        return search(root->left, value);
+    }
+    else
+    {
+        return search(root->right, value);
+    }
+}
+
+void main()
+{
+    struct Node *root = NULL;
+
+    // Insert values into the Binary Search Tree
+    root = insert(root, 50);
+    insert(root, 30);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 70);
+    insert(root, 60);
+    insert(root, 80);
+
+    // Perform in-order traversal to display the sorted values
+    printf("In-order traversal : ");
+    inOrderTraversal(root);
+    printf("\n");
+
+    // Search for a value in the Binary Search Tree
+    int searchValue = 40;
+    struct Node *result = search(root, searchValue);
+    if (result != NULL)
+    {
+        printf("%d found in the Binary Search Tree.\n", searchValue);
+    }
+    else
+    {
+        printf("%d not found in the Binary Search Tree.\n", searchValue);
+    }
+}*/

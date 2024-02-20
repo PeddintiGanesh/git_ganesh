@@ -1,0 +1,284 @@
+1.Write shell program to check whether the given number is prime or not
+
+echo "enter a number"
+read num
+i=2
+flag=0
+while [ $i -lt $num ]
+do
+   if [ `expr $num % 2` -eq 0 ]
+    then
+    flag=1
+    fi
+    i=`expr $i + 1`
+ done
+if [ $flag -eq 0 ]
+then
+  echo "given number is prime"
+else
+  echo "given unmber is not a prime"
+fi
+
+OUTPUT
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+2. //shell program to check print fibonacci sequence with in the given range 
+
+echo "enter the range"
+read n
+a=0
+b=1
+echo $a
+echo $b
+c=0
+c=`expr $a + $b`
+while [ $c -lt $n ]
+do
+ echo $c
+ a=$b
+ b=$c
+  c=`expr $a + $b`
+ done
+
+OUTPUT
+
+                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. //shell program to check whether the given string is palindrome or not
+
+echo "Enter a string"
+read str
+len=`echo $str | wc -c`
+len=`expr $len - 1`
+i=1
+j=`expr $len / 2`
+while [ $i -le $j ]
+do
+k=`echo $str | cut -c $i`
+l=`echo $str | cut -c $len`
+if [ $k != $l ]
+then
+echo "String is not palindrome"
+exit
+fi
+i=`expr $i + 1`
+len=`expr $len - 1`
+done
+echo "String is palindrome"
+
+OUTPUT
+
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4. // shell program to find the grade of students 
+echo "enter your name and number"
+read name num
+echo "enter your five subjects marks"
+read sub1
+read sub2
+read sub3
+read sub4
+read sub5
+total=`expr $sub1 + $sub2 + $sub3 + $sub4 + $sub5`
+avg=`expr $total / 5`
+echo "$name \t $num"
+if [ $avg -ge 80 ]
+then
+echo "grade A"
+elif [ $avg -ge 70 -a $avg -lt 80  ]
+then
+echo "grade B"
+elif [ $avg -ge 60 -a $avg -lt 70 ]
+then
+echo "grade C"
+elif [ $avg -ge 50 -a $avg -lt 60 ]
+then
+echo "grade D"
+elif  [ $avg -ge 40 -a $avg -lt 50 ]
+then
+echo " grade E"
+else
+echo "grade F"
+fi
+OUTPUT
+                                   
+
+
+
+
+
+
+
+5. // shell program to check whether the given number is armstrong or not
+echo "enter a number"
+read c
+
+x=$c
+sum=0
+r=0
+n=0
+while [ $x -gt 0 ]
+do
+r=`expr $x % 10`
+n=`expr $r \* $r \* $r`
+sum=`expr $sum + $n`
+x=`expr $x / 10`
+done
+if [ $sum -eq $c ]
+then
+echo "armstrong number"
+else
+echo "not armstrong number"
+fi
+
+OUTPUT
+
+                                        
+
+
+
+
+
+
+
+
+
+
+
+6. //shell program to print the ncr values
+fact()
+{
+  i=1
+  a=1
+  while [ $i -le $x ]
+  do
+   a=`expr $a \* $i`
+   i=`expr $i + 1`
+  done
+}
+echo "enter the n value"
+ read n
+echo "enter the r value"
+ read r
+ x=$n
+ fact
+ nf=$a
+
+ x=$r
+ fact
+ rf=$a
+ x=`expr $n - $r`
+ rf=$a
+ fact
+nrf=$a
+ den=`expr $rf \* $nrf`
+  res=`expr $nf / $den`
+echo $res
+  OUTPUT                                              
+                                          
+
+
+
+7. //shell program to check whether the give number is palindrome or not
+echo "Enter any number"
+read num
+m=`expr $num`
+sum=0
+while [ $num -gt 0 ]
+do
+r=`expr $num % 10`
+sum=`expr $sum \* 10 + $r`
+num=`expr $num / 10`
+done
+if [ $m -eq $sum ]
+then
+echo "Given number is palindrome"
+else
+echo "The number is not palindrome"
+fi
+OUTPUT
+
+
+
+                                     
+
+
+
+
+
+
+
+
+
+
+
+
+8.//shell program to fin min and max elements in a array
+echo "Enter your range"
+read n
+i=0
+echo "Enter the elements"
+while [ $i -lt $n ]
+do
+ read num
+ eval arr$i=$num
+ i=`expr $i + 1`
+done
+i=0
+eval min=\$arr$i
+eval max=\$arr$i
+i=1
+while [ $i -lt $n ]
+do
+ eval t=\$arr$i
+ if [ $t -lt $min ]
+ then
+  min=$t
+  elif [ $t -gt $max ]
+ then
+  max=$t
+ fi
+ i=`expr $i + 1`
+done
+echo "The minimum value of the array is $min"
+echo "The maximum value of the array is $max"
+OUTPUT
+                               

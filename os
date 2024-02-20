@@ -39,7 +39,7 @@ void main()
     printf("\nProcess\tBurst Time\tWaiting Time\tTurnaround Time\n");
     for (int i = 0; i < n; i++)
     {
-        printf("%d\t\ts%d\t\t%d\t\t%d\n", processes[i], burst_time[i], waiting_time[i], turnaround_time[i]);
+        printf("%d\t\t%d\t\t%d\t\t%d\n", processes[i], burst_time[i], waiting_time[i], turnaround_time[i]);
     }
 
     // Calculate and display average waiting time and turnaround time
@@ -54,7 +54,7 @@ void main()
 
     printf("\nAverage Waiting Time: %f\n", avg_waiting_time);
     printf("Average Turnaround Time: %f\n", avg_turnaround_time);
-} 
+}
 
  //SJF
 
@@ -261,6 +261,7 @@ void main()
      avg_waiting_time /= n;
      avg_turnaround_time /= n;
 
+
      printf("\nAverage Waiting Time: %.2f\n", avg_waiting_time);
      printf("Average Turnaround Time: %.2f\n", avg_turnaround_time);
  }
@@ -364,7 +365,7 @@ void main()
          else
              printf("process%d is blocked \n", s[i]);
      }
-     printf("total fragmentation is %d", intr);
+     printf(" fragmentation is %d", intr);
      getch();
  }
 
@@ -468,7 +469,36 @@ int main() {
     return 0;
 }
 
-//SEQENCED
+//SEQUENCED
+
+#include<stdio.h>
+int main(){
+	int n,i,j,b[20],sb[20],t[20],c[20][20];
+	printf("Enter no.of files : ");
+	scanf("%d",&n);
+	for(i=0;i<n;i++){
+		printf("\nEnter no of blocks occupied by file %d : ",i+1);
+		scanf("%d",&b[i]);
+		printf("\nEnter the starting block of file %d : ",i+1);
+		scanf("%d",&sb[i]);
+		t[i]=sb[i];
+		for(j=0;j<b[i];j++)
+			c[i][j]=sb[i]++;
+	}
+	printf("\n\nFilename \t Starting Block\t length \n");
+	for(i=0;i<n;i++)
+		printf("\n%d\t\t%d\t\t%d\n",i+1,t[i],b[i]);
+	for(i=0;i<n;i++){
+	printf("\nSequenced memory allocations of file %d :",i+1);
+	for(j=0;j<b[i];j++)
+		printf("%d  ",&c[i][j]);
+	printf("\n");
+	}
+	return 0;
+}
+
+
+//1.1)SEQENCED(VS)
 
 #define MAX_BLOCKS 100
 
@@ -537,19 +567,61 @@ void main() {
     }
 }*/
 
-//indexed
+//LINKED...
+
+#include <stdio.h>
+struct file
+{
+    char fname[10];
+    int start, size, block[10];
+} f[10];
+int main()
+{
+    int i, j, n;
+    printf("Enter the No.of files : ");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++)
+    {
+        printf("\nEnter file %d name : ", i + 1);
+        scanf("%s", &f[i].fname);
+        printf("Enter the starting Block of file %d : ", i + 1);
+        scanf("%d", &f[i].start);
+        printf("Enter the No.of blocks : ");
+        scanf("%d", &f[i].size);
+        printf("Enter the blocks : ");
+        for (j = 0; j < f[i].size; j++)
+        {
+            scanf("%d", &f[i].block[j]);
+        }
+    }
+    printf("\nFile name\t Start\t Size\t blocks");
+    for (i = 0; i < n; i++)
+    {
+        printf("\n%s\t\t %d\t %d \t", f[i].fname, f[i].start, f[i].size);
+        for (j = 0; j < f[i].size - 1; j++)
+        {
+            printf("%d-->", f[i].block[j]);
+        }
+        printf("%d", f[i].block[j]);
+        printf("\n");
+    }
+}
+
+//INDEXED
 
 #define MAX_BLOCKS 100
 #define MAX_FILES 10
 
-void main() {
+void main()
+{
     int total_blocks, num_files;
 
     // Input the total number of blocks on the storage media
     printf("Enter the total number of blocks on the storage media: ");
     scanf("%d", &total_blocks);
 
-    if (total_blocks <= 0 || total_blocks > MAX_BLOCKS) {
+    if (total_blocks <= 0 || total_blocks > MAX_BLOCKS)
+    {
         printf("Invalid number of blocks.\n");
         return 1;
     }
@@ -558,7 +630,8 @@ void main() {
     printf("Enter the number of files: ");
     scanf("%d", &num_files);
 
-    if (num_files <= 0 || num_files > MAX_FILES) {
+    if (num_files <= 0 || num_files > MAX_FILES)
+    {
         printf("Invalid number of files.\n");
         return 1;
     }
@@ -569,11 +642,13 @@ void main() {
 
     // Input information for each file
     printf("Enter information for each file:\n");
-    for (int i = 0; i < num_files; i++) {
+    for (int i = 0; i < num_files; i++)
+    {
         printf("File %d index block: ", i + 1);
         scanf("%d", &index_blocks[i]);
 
-        if (index_blocks[i] <= 0 || index_blocks[i] > total_blocks) {
+        if (index_blocks[i] <= 0 || index_blocks[i] > total_blocks)
+        {
             printf("Invalid index block.\n");
             return 1;
         }
@@ -581,7 +656,8 @@ void main() {
         printf("File %d starting block: ", i + 1);
         scanf("%d", &start_blocks[i]);
 
-        if (start_blocks[i] <= 0 || start_blocks[i] > total_blocks) {
+        if (start_blocks[i] <= 0 || start_blocks[i] > total_blocks)
+        {
             printf("Invalid starting block.\n");
             return 1;
         }
@@ -589,7 +665,8 @@ void main() {
         printf("File %d ending block: ", i + 1);
         scanf("%d", &end_blocks[i]);
 
-        if (end_blocks[i] <= 0 || end_blocks[i] > total_blocks || end_blocks[i] < start_blocks[i]) {
+        if (end_blocks[i] <= 0 || end_blocks[i] > total_blocks || end_blocks[i] < start_blocks[i])
+        {
             printf("Invalid ending block.\n");
             return 1;
         }
@@ -598,35 +675,8 @@ void main() {
     // Display file allocation details
     printf("\nFile Allocation Details:\n");
     printf("File\tIndex Block\tStart Block\tEnd Block\n");
-    for (int i = 0; i < num_files; i++) {
+    for (int i = 0; i < num_files; i++)
+    {
         printf("%d\t%d\t\t%d\t\t%d\n", i + 1, index_blocks[i], start_blocks[i], end_blocks[i]);
     }
-}
-
-//SEQUENCED 
-
-#include<stdio.h>
-int main(){
-	int n,i,j,b[20],sb[20],t[20],c[20][20];
-	printf("Enter no.of files : ");
-	scanf("%d",&n);
-	for(i=0;i<n;i++){
-		printf("\nEnter no of blocks occupied by file %d : ",i+1);
-		scanf("%d",&b[i]);
-		printf("\nEnter the starting block of file %d : ",i+1);
-		scanf("%d",&sb[i]);
-		t[i]=sb[i];
-		for(j=0;j<b[i];j++)
-			c[i][j]=sb[i]++;
-	}
-	printf("\n\nFilename \t Starting Block\t length \n");
-	for(i=0;i<n;i++)
-		printf("\n%d\t\t%d\t\t%d\n",i+1,t[i],b[i]);
-	for(i=0;i<n;i++){
-	printf("\nSequenced memory allocations of file %d :",i+1);
-	for(j=0;j<b[i];j++)
-		printf("%d  ",&c[i][j]);
-	printf("\n");
-	}
-	return 0;
 }

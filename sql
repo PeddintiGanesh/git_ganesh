@@ -75,3 +75,24 @@ declare
   7  end;
   8  /
 
+//PROCEDURES(posional)
+
+create or replace procedure pr2
+  2  (n1 in number,n2 in number,tot out number) is
+  3  begin
+  4  tot:=n1+n2;
+  5  end;
+  6  /
+
+Procedure created.
+
+SQL> variable t number
+SQL> exec pr2(33,66,:t)
+
+PL/SQL procedure successfully completed.
+
+SQL> print t
+
+         T
+----------
+        99

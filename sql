@@ -53,6 +53,29 @@ declare
  10  end;
  11  /
 
+//GCD Using functions 
+
+declare
+2 a int;
+3. b int;
+4 c int;
+5 procedure gcd(x in int,y in int, z out int)
+6 is
+7 begin
+8 if y=0 then
+9 z:=x;
+10 else
+11 gcd(y,x mod y,z);
+12 end if;
+13 end;
+14 begin
+15 a:=&a;
+16 b:=&b;
+17 gcd(a,b,c);
+18 dbms_output.put_line(c);
+19 end;
+20 /
+
 //LOOP
 
  declare
@@ -96,3 +119,25 @@ SQL> print t
          T
 ----------
         99
+
+//IMPLICIT (CURSORS)
+
+ DECLARE
+ s_id student.id % type;
+ s_name student.name % type;
+ s_rno student.rno % type;
+ CURSOR s_student is
+ SELECT id, name, rno FROM student;
+ BEGIN
+ OPEN s_student;
+ LOOP
+ FETCH s_student into s_id, s_name, s_rno;
+ EXIT WHEN s_student % notfound;
+ dbms_output.put_line (s_id ||'  '|| s_name ||'  '|| s_rno);
+ END LOOP;
+ CLOSE s_student;
+ END;
+/
+
+
+

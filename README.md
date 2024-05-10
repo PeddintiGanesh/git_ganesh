@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/leetcode-repo-logo.png" width="350" height="200">
+  <img src="C:\Users\mahes\Downloads\coding.png" width="350" height="200">
 </p>
 <p align="center">
   <a href="https://www.linkedin.com/public-profile/settings?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact-info%3BZLCal8lYQ1u4XtpaWlikSw%3D%3D">LinkedIn</a>

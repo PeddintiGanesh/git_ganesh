@@ -1,3 +1,4 @@
+
 /*
  * OUTPUT :  Enter the message to encrypt: ganesh
              Enter the secret key (8 characters): ganesh12

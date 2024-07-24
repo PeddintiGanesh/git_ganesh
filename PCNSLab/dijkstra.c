@@ -1,3 +1,25 @@
+/*Enter no. of vertices: 3
+
+Enter the adjacency matrix: 
+1 2 3
+1 3 5
+2 4 6
+
+Enter the starting node:3
+
+Distance of node 0 = 0
+Path=0<-3
+Distance of node 1 = 0
+Path=1<-3
+Distance of node 2 = 1
+Path=2<-3
+*/
+
+
+
+
+
+
 #include<stdio.h>
 #include<conio.h>
 #define INFINITY 9999

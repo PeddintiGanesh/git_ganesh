@@ -1,3 +1,33 @@
+/*
+Enter the number of nodes : 3
+
+Enter the cost matrix :
+1 2 3
+2 4 6
+1 3 5
+
+
+State value for router 1 is 
+	
+node 1 via 1 Distance 0	
+node 2 via 2 Distance 2	
+node 3 via 3 Distance 3
+
+State value for router 2 is 
+	
+node 1 via 1 Distance 2	
+node 2 via 2 Distance 0	
+node 3 via 1 Distance 5
+
+State value for router 3 is 
+	
+node 1 via 1 Distance 1	
+node 2 via 2 Distance 3	
+node 3 via 3 Distance 0
+*/
+
+
+
 #include<stdio.h>
 struct node
 {

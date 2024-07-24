@@ -1,3 +1,11 @@
+/*
+Enter a string : ganesh
+length is : 6
+*/
+
+
+
+
 #include<stdio.h>
 #include<conio.h>
 #include<string.h>

@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login and Payment</title>
+</head>
+<body bgcolor="pink">
+    <br><br><br>
+    <script language="javascript">
+        function validate() {
+            var flag = 1;
+            var id = document.myform.id.value;
+            var pwd = document.myform.pwd.value;
+            var amount = document.myform.amount.value;
+            var num = document.myform.num.value;
+
+            if (id === "" || pwd === "" || amount === "" || num === "") {
+                flag = 0;
+                alert("Please fill in all the fields.");
+            }
+
+            var str = amount;
+            var x = new RegExp("^\\d+$");
+
+            if (!str.match(x)) {
+                flag = 0;
+                alert("Amount must be a positive number.");
+            }
+
+            if (flag === 1) {
+                alert("VALID INPUT");
+                window.location.href = "order.html"; // Change to the desired page.
+            } else {
+                alert("INVALID INPUT");
+                document.myform.focus();
+            }
+        }
+    </script>
+
+    <form name="myform">
+        <div align="center">
+            <pre>
+                LOGIN ID: <input type="text" name="id"><br>
+                PASSWORD: <input type="password" name="pwd"><br>
+                AMOUNT: <input type="text" name="amount"><br>
+                CREDIT CARD NUMBER: <input type="password" name="num">
+            </pre>
+            <br><br>
+        </div>
+        <div align="center">
+            <input type="button" value="OK" onClick="validate()">
+            <input type="reset" value="Clear">
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,45 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+</head>
+<body bgcolor="pink">
+    <br><br><br>
+    <form name="myform" onsubmit="return validateForm();">
+        <label for="title">Title: </label>
+        <input type="text" id="title" name="title" required>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function validateForm() {
+            var flag = 1;
+            var title = document.myform.title.value;
+
+            if (title === "") {
+                flag = 0;
+                alert("Please enter a value in the 'Title' field.");
+            } else if (title.toLowerCase() === "c") {
+                alert("Valid input: 'Title' is 'C'");
+                window.location.href = "payment.html"; // Change to the desired page.
+                
+            } else if (title.toLowerCase() === "jsp") {
+                alert("Valid input: 'Title' is 'JSP'");
+                window.location.href = "payment.html"; // Change to the desired page.
+                
+            } else {
+                flag = 0;
+                alert("Invalid input. 'Title' must be 'C' or 'JSP'.");
+            }
+
+            return flag === 1;
+              
+        }
+    </script>
+</body>
+</html>
+
+

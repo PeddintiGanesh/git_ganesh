@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+</head>
+<body bgcolor="pink">
+    <br><br><br>
+    <script language="javascript">
+        function validate() {
+            var flag = 1;
+            var id = document.myform.id.value;
+            var pwd = document.myform.pwd.value;
+            
+            if (id === "" || pwd === "") {
+                alert("Login ID and Password must be filled.");
+                flag = 0;
+            }
+            
+            if (flag === 1) {
+                alert("VALID INPUT");
+                window.location.href = "catalog.html"; // Change to the desired page.
+            } else {
+                alert("INVALID INPUT");
+            }
+        }
+    </script>
+    <form name="myform">
+        <div align="center">
+            <pre>
+            LOGIN ID: <input type="text" name="id"><br>
+            PASSWORD: <input type="password" name="pwd"><br><br>
+            </pre>
+            <input type="button" value="OK" onClick="validate()">
+            <input type="reset" value="Clear">
+        </div>
+    </form>
+</body>
+</html>
+
+

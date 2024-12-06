@@ -1,0 +1,56 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Information</title>
+</head>
+<body bgcolor="pink">
+    <br><br><br>
+    <script language="javascript">
+        function validate() {
+            var flag = 1;
+            var id = document.myform.id.value;
+            var title = document.myform.title.value;
+            var no = document.myform.no.value;
+            var cost = document.myform.cost.value;
+
+            if (id === "" || title === "" || no === "" || cost === "") {
+                flag = 0;
+            }
+
+            var str = title.toLowerCase();
+            var str1 = parseInt(cost);
+
+            if (!((str === "c" && str1 === 444) || (str === "jsp" && str1 === 555))) {
+                flag = 0;
+            }
+
+            if (flag === 1) {
+                alert("VALID INPUT");
+            } else {
+                alert("INVALID INPUT");
+                document.myform.focus();
+            }
+        }
+    </script>
+
+    <form name="myform" action="payment.html" target="right">
+        <div align="center">
+            <pre>
+                LOGIN ID: <input type="text" name="id"><br>
+                TITLE: <input type="text" name="title"><br>
+                NO. OF BOOKS: <input type="text" name="no"><br>
+                COST OF BOOK: <input type="text" name="cost"><br>
+            </pre>
+            <br><br>
+        </div>
+
+        <div align="center">
+            <input type="submit" value="OK" onClick="validate()">
+            <input type="reset" value="Clear">
+        </div>
+    </form>
+</body>
+</html>
+

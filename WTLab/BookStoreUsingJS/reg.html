@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+</head>
+<body bgcolor="pink">
+    <br><br>
+    <script type="text/javascript">
+        function validate() {
+            var flag = 1;
+            var name = document.myform.name.value;
+            var addr = document.myform.addr.value;
+            var phno = document.myform.phno.value;
+            var id = document.myform.id.value;
+            var pwd = document.myform.pwd.value;
+            
+            if (name === "" || addr === "" || phno === "" || id === "" || pwd === "") {
+                alert("Please fill in all the details.");
+                flag = 0;
+            }
+
+            var str = document.myform.phno.value;
+            var x = new RegExp("\\d", "g");
+            if (!(str.match(x)) || str.length !== 10) {
+                flag = 0;
+            }
+
+            var str1 = document.myform.id.value;
+            var x1 = new RegExp("^[A-Z][a-zA-Z]+$", "g");
+            if (!str1.match(x1)) {
+                flag = 0;
+                alert("Invalid UserID");
+            }
+
+            var str2 = document.myform.pwd.value;
+            var x2 = new RegExp("^[A-Z][a-zA-Z]+$", "g");
+            if (!str2.match(x2)) {
+                flag = 0;
+                alert("Invalid password");
+            }
+
+            if (flag === 1) {
+                alert("VALID INPUT");
+                window.location.href = "login.html";
+            } else {
+                alert("INVALID INPUT");
+                document.myform.focus();
+            }
+        }
+    </script>
+
+    <form name="myform">
+        <div align="center">
+            <pre>
+                NAME :<input type="text" name="name"><br>
+                ADDRESS :<input type="text" name="addr"><br>
+                CONTACT NUMBER :<input type="text" name="phno"><br>
+                LOGIN ID :<input type="text" name="id"><br>
+                PASSWORD :<input type="password" name="pwd">
+            </pre>
+            <br><br>
+        </div>
+        <div align="center">
+            <input type="button" value="Register" onClick="validate()">
+            <input type="reset" value="Clear">
+        </div>
+    </form>
+</body>
+</html>

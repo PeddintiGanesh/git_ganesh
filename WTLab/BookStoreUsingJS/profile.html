@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+</head>
+<body bgcolor="pink">
+    <br><br>
+    <script type="text/javascript">
+        function validate() {
+            var name = document.myform.name.value;
+            var addr = document.myform.addr.value;
+            var phno = document.myform.phno.value;
+            var id = document.myform.id.value;
+            var pwd = document.myform.pwd.value;
+
+            if (name === "" || addr === "" || phno === "" || id === "" || pwd === "") {
+                alert("Please fill in all the details.");
+            } else if (!/^\d{10}$/.test(phno)) {
+                alert("Invalid contact number. It must be 10 digits.");
+            } else {
+                alert("Profile updated successfully.");
+               
+            }
+        }
+    </script>
+
+    <form name="myform">
+        <div align="center">
+            <pre>
+                NAME: <input type="text" name="name"><br>
+                ADDRESS: <input type="text" name="addr"><br>
+                CONTACT NUMBER: <input type="text" name="phno"><br>
+                LOGIN ID: <input type="text" name="id"><br>
+                PASSWORD: <input type="password" name="pwd">
+            </pre>
+            <br><br>
+        </div>
+        <div align="center">
+            <input type="button" value="Update Profile" onClick="validate()">
+            <input type="reset" value="Clear">
+        </div>
+    </form>
+</body>
+</html>

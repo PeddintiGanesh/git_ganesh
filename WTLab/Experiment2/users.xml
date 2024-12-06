@@ -2,62 +2,62 @@
 <users>
     <user>
         <id>1</id>
-        <name>Gladys</name>
-        <email>Gladys@gmail.com</email>
-        <location>USA</location>
+        <name>John Doe</name>
+        <email>john@example.com</email>
+        <phone>1234567890</phone>
     </user>
     <user>
         <id>2</id>
-        <name>Daniel</name>
-        <email>Dany@gmail.com</email>
-        <location>USA</location>
+        <name>Jane Smith</name>
+        <email>jane@example.com</email>
+        <phone>9876543210</phone>
     </user>
     <user>
         <id>3</id>
-        <name>Emily</name>
-        <email>Emily@example.com</email>
-        <location>Canada</location>
+        <name>Robert Brown</name>
+        <email>robert@example.com</email>
+        <phone>4561237890</phone>
     </user>
     <user>
         <id>4</id>
-        <name>John</name>
-        <email>John@example.com</email>
-        <location>UK</location>
+        <name>Emily White</name>
+        <email>emily@example.com</email>
+        <phone>6547891230</phone>
     </user>
     <user>
         <id>5</id>
-        <name>Sophia</name>
-        <email>Sophia@example.com</email>
-        <location>Germany</location>
+        <name>Michael Green</name>
+        <email>michael@example.com</email>
+        <phone>7894561230</phone>
     </user>
     <user>
         <id>6</id>
-        <name>Michael</name>
-        <email>Michael@example.com</email>
-        <location>Australia</location>
+        <name>Sarah Black</name>
+        <email>sarah@example.com</email>
+        <phone>3216549870</phone>
     </user>
     <user>
         <id>7</id>
-        <name>Olivia</name>
-        <email>Olivia@example.com</email>
-        <location>France</location>
+        <name>David Wilson</name>
+        <email>david@example.com</email>
+        <phone>9873216540</phone>
     </user>
     <user>
         <id>8</id>
-        <name>William</name>
-        <email>William@example.com</email>
-        <location>Brazil</location>
+        <name>Olivia Johnson</name>
+        <email>olivia@example.com</email>
+        <phone>6541239870</phone>
     </user>
     <user>
         <id>9</id>
-        <name>Ava</name>
-        <email>Ava@example.com</email>
-        <location>Spain</location>
+        <name>William Brown</name>
+        <email>william@example.com</email>
+        <phone>7891236540</phone>
     </user>
     <user>
         <id>10</id>
-        <name>James</name>
-        <email>James@example.com</email>
-        <location>Italy</location>
+        <name>Sophia Martinez</name>
+        <email>sophia@example.com</email>
+        <phone>1239874560</phone>
     </user>
 </users>

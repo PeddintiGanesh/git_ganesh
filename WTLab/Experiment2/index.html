@@ -1,63 +1,89 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Retrieve User Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch User Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
 </head>
-
 <body>
-    <label for="userId">Enter User ID: </label>
-    <input type="text" id="userId">
-    <button onclick="getUserDetails()">Get Details</button>
-    <div id="output"></div>
+
+    <h1>Fetch User Details</h1>
+    <input type="text" id="userId" placeholder="Enter User ID">
+    <button onclick="fetchUserDetails()">Get User Details</button>
+
+    <div class="output" id="output"></div>
+
     <script>
-        function getUserDetails() {
-            // Get user ID input
-            var inputUserId = document.getElementById("userId").value;
-            // Fetch XML data (replace 'data.xml' with your XML file path)
-            fetch('users.xml')
-                .then(response => response.text())
-                .then(data => {
-                    // Parse XML data
-                    var parser = new DOMParser();
-                    var xmlDoc = parser.parseFromString(data, "text/xml");
-                    // Find user nodes based on ID
-                    var users = xmlDoc.getElementsByTagName('user');
-                    var userDetails = [];
-                    // Loop through users to find matching user ID
-                    for (var i = 0; i < users.length; i++) {
-                        var userId = users[i].getElementsByTagName('id')[0].childNodes[0].nodeValue;
-                        if (userId === inputUserId) {
-                            // Extract user details including ID
-                            var userName = users[i].getElementsByTagName('name')[0].childNodes[0].nodeValue;
-                            var userEmail = users[i].getElementsByTagName('email')[0].childNodes[0].nodeValue;
-                            var userLocation =
-                                users[i].getElementsByTagName('location')[0].childNodes[0].nodeValue;
-                            userDetails.push({
-                                'ID': userId,
-                                'Name': userName,
-                                'Email': userEmail,
-                                'Location': userLocation
-                            });
+        function fetchUserDetails() {
+            const userId = document.getElementById("userId").value.trim();
+            const output = document.getElementById("output");
+
+            if (!userId) {
+                output.innerHTML = "<p>Please enter a User ID.</p>";
+                return;
+            }
+
+            // Fetch the XML file
+            fetch("users.xml")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to load XML file.");
+                    }
+                    return response.text();
+                })
+                .then(xmlText => {
+                    // Parse the XML
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlText, "application/xml");
+
+                    // Find the user with the given ID
+                    const users = xmlDoc.getElementsByTagName("user");
+                    let userFound = false;
+
+                    for (let user of users) {
+                        const id = user.getElementsByTagName("id")[0].textContent;
+
+                        if (id === userId) {
+                            userFound = true;
+                            const name = user.getElementsByTagName("name")[0].textContent;
+                            const email = user.getElementsByTagName("email")[0].textContent;
+                            const phone = user.getElementsByTagName("phone")[0].textContent;
+
+                            output.innerHTML = `
+                                <h2>User Details</h2>
+                                <p><strong>ID:</strong> ${id}</p>
+                                <p><strong>Name:</strong> ${name}</p>
+                                <p><strong>Email:</strong> ${email}</p>
+                                <p><strong>Phone:</strong> ${phone}</p>
+                            `;
+                            break;
                         }
                     }
-                    // Display user details
-                    var outputDiv = document.getElementById("output");
-                    outputDiv.innerHTML = "<h3>User Details:</h3>";
-                    if (userDetails.length > 0) {
-                        userDetails.forEach(function (user) {
-                            outputDiv.innerHTML += "<p><strong>ID:</strong> " + user.ID + "</p>";
-                            outputDiv.innerHTML += "<p><strong>Name:</strong> " + user.Name + "</p>";
-                            outputDiv.innerHTML += "<p><strong>Email:</strong> " + user.Email + "</p>";
-                            outputDiv.innerHTML += "<p><strong>Location:</strong> " + user.Location + "</p>";
-                        });
-                    } else {
-                        outputDiv.innerHTML += "<p>No user found with ID: " + inputUserId + "</p>";
+
+                    if (!userFound) {
+                        output.innerHTML = "<p>User not found.</p>";
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    output.innerHTML = `<p>Error: ${error.message}</p>`;
+                });
         }
     </script>
-</body>
 
+</body>
 </html>
